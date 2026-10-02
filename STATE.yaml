@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: audit_003_closed_weak_product_evidence
+  status: earnings_vs_trend_synthesized
 
   reconnaissance:
     universe_version: 1
@@ -29,6 +29,7 @@ research:
       - evidence/AUDIT-002-LONG-ONLY.md
       - evidence/AUDIT-003-PRODUCT-UNIVERSE.md
       - evidence/AUDIT-003-DATA-INTEGRITY.md
+      - evidence/SYNTH-002-EARNINGS-VS-TREND.md
 
     method_families:
       BENCH:
@@ -327,17 +328,20 @@ research:
       FUND_EARNINGS_REVISION:
         family: FUND
         name: Earnings surprise and revision underreaction
-        disposition: retain
-        confidence: high
-        experiment_candidate: provisional
+        disposition: defer
+        confidence: moderate
+        experiment_candidate: no
         rationale: >-
-          Post-earnings-announcement and forecast-revision drift have unusually
-          deep literatures and plausible underreaction mechanisms. Accessibility,
-          data timing, turnover, and contemporary attenuation remain the main
-          unresolved implementation questions.
+          PEAD and earnings-revision predictability retain meaningful historical
+          and recent evidence, but interpretation is contested by newer work and a
+          clean classic test generally requires point-in-time analyst expectations
+          such as I/B/E/S. Public substitutes either change the hypothesis or add
+          substantial event-data engineering. Under the project's finite-time
+          constraint, this does not justify the next experiment.
         evidence:
           - EV-FUND-ER-001
           - EV-FUND-ER-002
+          - evidence/SYNTH-002-EARNINGS-VS-TREND.md
 
       FUND_DISCRETIONARY_STOCK_PICKING:
         family: FUND
@@ -380,17 +384,21 @@ research:
         family: PRICE
         name: Time-series momentum and diversified trend
         disposition: retain
-        confidence: high
+        confidence: moderate
         experiment_candidate: provisional
         rationale: >-
-          Trend evidence spans many asset classes and unusually long historical
-          samples. However, volatility scaling explains part of reported alpha and
-          direct replication can require futures, short exposure, leverage, and
-          diversified execution beyond a simple retail chart rule.
+          Trend evidence spans many asset classes and unusually long histories,
+          but volatility-scaling critiques and recent bootstrap-based replication
+          challenges make post-publication survivability an open empirical
+          question. Unlike earnings underreaction, the classic AQR TSMOM factor is
+          publicly updated and a transparent retail trend vehicle exists, so the
+          claim can be screened cheaply before any licensed futures data or
+          infrastructure is justified.
         evidence:
           - EV-PRICE-TSMOM-001
           - EV-PRICE-TSMOM-002
           - EV-PRICE-TSMOM-003
+          - evidence/SYNTH-002-EARNINGS-VS-TREND.md
 
       PRICE_SHORT_TERM_REVERSAL:
         family: PRICE
@@ -547,20 +555,56 @@ research:
   claims: {}
 
 next_action:
-  id: SYNTH-002
+  id: AUDIT-004
   objective: >-
-    Compare the two remaining serious but untested provisional candidates,
-    FUND_EARNINGS_REVISION and PRICE_TIME_SERIES_TREND, on current empirical
-    support, data accessibility, implementation burden, costs, and the cheapest
-    falsifiable individual-level test before authorizing another experiment.
-  constraints:
-    - research_only
-    - no_capital_deployment
-    - no_paid_data_purchase_without_explicit_owner_authorization
-    - prefer_a_single_bounded_comparative_gate_over_parallel_research_projects
-    - distinguish_effect_existence_from_individual_exploitability
-    - stop_if_neither_candidate_has_expected_decision_value_above_passive_exposure
+    Test whether the classic diversified time-series-momentum factor survived
+    publication strongly enough to justify an implementation-level managed-futures
+    audit.
+  stage_a:
+    representation: >-
+      AQR Time Series Momentum Factors, Monthly; diversified aggregate factor from
+      the updated public data set associated with Moskowitz, Ooi, and Pedersen
+      (2012).
+    data_source: >-
+      AQR public Time Series Momentum: Factors, Monthly data set, with exact
+      downloaded file hash and vintage preserved.
+    windows:
+      post_publication:
+        start: 2013-01
+        end: latest_common_published_month
+      recent:
+        start: 2020-01
+        end: latest_common_published_month
+    constraints:
+      - use_published_factor_without_parameter_changes
+      - no_signal_optimization
+      - no_lookback_search
+      - no_asset_class_selection
+      - report_annualized_arithmetic_mean_volatility_sharpe_cumulative_return_and_max_drawdown
+      - report_calendar_year_signs
+      - factor_returns_are_research_evidence_not_investable_returns
+      - label_exploratory_not_confirmatory
+      - no_capital_deployment
+    interpretation:
+      clear_survivor: >-
+        Annualized arithmetic mean and compounded return are both positive in both
+        the 2013+ post-publication window and the 2020+ recent window.
+      not_supported: >-
+        Annualized arithmetic mean and compounded return are both nonpositive in
+        both windows.
+      mixed: >-
+        Any other pattern.
+  stage_b:
+    authorization_rule: >-
+      Run only if stage_a is clear_survivor. If stage_a is mixed, stop and require
+      explicit decision-value justification before any product test. If
+      not_supported, defer the trend implementation path.
+    candidate: KMLM
+    purpose: >-
+      Determine whether a transparent long-term-moving-average trend ETF preserves
+      economically meaningful positive excess returns after its 0.90% fund cost
+      and implementation drag.
   completion_condition: >-
-    The project identifies whether earnings underreaction, diversified trend, both,
-    or neither merits the next bounded experiment. The comparison must explicitly
-    account for the opportunity cost of research time and implementation complexity.
+    Stage A produces a frozen disposition. Stage B is entered only under the
+    predeclared authorization rule. No licensed futures-data purchase or direct
+    futures implementation is authorized.
