@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: long_only_gate_complete
+  status: audit_003_product_universe_frozen
 
   reconnaissance:
     universe_version: 1
@@ -27,6 +27,7 @@ research:
       - evidence/SYNTH-001-IMPLEMENTABILITY.md
       - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
       - evidence/AUDIT-002-LONG-ONLY.md
+      - evidence/AUDIT-003-PRODUCT-UNIVERSE.md
 
     method_families:
       BENCH:
@@ -611,6 +612,44 @@ next_action:
     implementation_not_supported: >-
       No Tier A or Tier B live-cohort fund satisfies the implementation_survivor
       rule.
+  performance_protocol:
+    frozen_cohort:
+      - QUAL
+      - SPHQ
+      - JQUA
+      - FQAL
+    benchmark: VTI
+    source: >-
+      Yahoo Finance chart API adjusted-close series, retrieved in one run and
+      preserved with raw response hashes. Adjusted close is used as the practical
+      total-return proxy; official fund-reported annual returns will be used only
+      as a cross-check, not substituted selectively.
+    window:
+      start_month: 2020-01
+      end_month: 2026-09
+    frequency: monthly
+    return_construction: >-
+      Use month-end adjusted closes; each monthly return is the ratio of the
+      current month-end adjusted close to the prior month-end adjusted close minus
+      one. Require all five tickers to have observations for the same months.
+    metrics:
+      - annualized_arithmetic_mean
+      - cagr
+      - annualized_volatility
+      - max_drawdown
+      - benchmark_relative_arithmetic_mean
+      - benchmark_relative_compounded_return
+      - tracking_error
+      - information_ratio
+      - monthly_benchmark_win_rate
+    data_integrity:
+      - preserve_raw_response_sha256
+      - preserve_first_and_last_observation_dates
+      - fail_if_common_months_are_missing_inside_the_window
+      - no_parameter_search
+      - no_ticker_substitution
+      - no_selective_end_date
+      - cross_check_selected_calendar_year_returns_against_official_fund_reports
   completion_condition: >-
     The project identifies whether at least one transparent, individually
     accessible implementation is sufficiently close to the surviving research
