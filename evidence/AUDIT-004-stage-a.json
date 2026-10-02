@@ -1,0 +1,38 @@
+{
+  "audit": "AUDIT-004",
+  "stage": "A",
+  "status": "exploratory_not_confirmatory",
+  "classification": "clear_survivor",
+  "workflow_run": 37079879099,
+  "workflow_head": "4dc27727784ff49dc197629735d0212cd6487482",
+  "artifact_digest": "sha256:bc23db86c01e574872ee677b866cbccb26de31b30144df401356bf0cec551d36",
+  "source": {
+    "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Time-Series-Momentum-Factors-Monthly.xlsx",
+    "sha256": "33470930e2269c0d97be4732ec2d9c27ddbc69ac8133b059a263e27400263eeb",
+    "bytes": 139830,
+    "first_factor_month": "1985-01",
+    "last_factor_month": "2026-05"
+  },
+  "post_publication_2013_plus": {
+    "start": "2013-01",
+    "end": "2026-05",
+    "months": 161,
+    "annualized_arithmetic_mean": 0.05371675946660301,
+    "annualized_volatility": 0.13080530316803424,
+    "sharpe": 0.41066193927625194,
+    "cumulative_return": 0.8336322635522984,
+    "max_drawdown": -0.27910776635734147,
+    "positive_month_rate": 0.515527950310559
+  },
+  "recent_2020_plus": {
+    "start": "2020-01",
+    "end": "2026-05",
+    "months": 77,
+    "annualized_arithmetic_mean": 0.04219614747441973,
+    "annualized_volatility": 0.13284747719694529,
+    "sharpe": 0.31762851929709046,
+    "cumulative_return": 0.23902980001187957,
+    "max_drawdown": -0.24559425662047374,
+    "positive_month_rate": 0.5584415584415584
+  }
+}
