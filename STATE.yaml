@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: equity_factor_survivability_audited
+  status: long_only_gate_complete
 
   reconnaissance:
     universe_version: 1
@@ -26,6 +26,7 @@ research:
       - evidence/RECON-004-EVENT-MACRO-INFO.md
       - evidence/SYNTH-001-IMPLEMENTABILITY.md
       - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
+      - evidence/AUDIT-002-LONG-ONLY.md
 
     method_families:
       BENCH:
@@ -288,16 +289,17 @@ research:
         experiment_candidate: provisional
         rationale: >-
           Profitability and composite quality signals have replicated across
-          markets. In AUDIT-001, RMW remained positively compounded over both the
-          frozen 2016+ and 2020+ windows with materially lower volatility than HML
-          or Mom. The next unresolved issue is whether the premium survives in a
-          simple large-stock long-only portfolio rather than depending on the short
-          leg of a research factor.
+          markets. AUDIT-001 found a positive RMW factor result, and the frozen
+          AUDIT-002 long-only gate classified the large-stock robust-profitability
+          portfolio as a clear survivor against the broad U.S. market in both the
+          2016+ and 2020+ windows. This justifies one more implementation-focused
+          audit, not capital deployment.
         evidence:
           - EV-FUND-QP-001
           - EV-FUND-QP-002
           - EV-FUND-QP-003
           - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
+          - evidence/AUDIT-002-LONG-ONLY.md
 
       FUND_FINANCIAL_STATEMENT_SCREENS:
         family: FUND
@@ -351,21 +353,21 @@ research:
         name: Cross-sectional momentum
         disposition: retain
         confidence: high
-        experiment_candidate: provisional
+        experiment_candidate: no
         rationale: >-
-          Medium-horizon winner-minus-loser continuation is documented in the
-          United States and internationally. In AUDIT-001, Mom remained positively
-          compounded in both frozen windows and was strongest of the three tested
-          factors over 2020+. Turnover and crash risk remain material, and the
-          next unresolved issue is whether a large-stock long-only winner
-          portfolio retains useful benchmark-relative behavior without the short
-          leg.
+          The long-short Mom factor remained positive in AUDIT-001, but the frozen
+          AUDIT-002 gate found that the large-stock long-only high-prior-return
+          portfolio failed the predeclared benchmark-relative test in both the
+          2016+ and 2020+ windows. Momentum remains an empirically credible
+          phenomenon, but this representation does not justify immediate deeper
+          implementation work for an individual long-only path.
         evidence:
           - EV-PRICE-XMOM-001
           - EV-PRICE-XMOM-002
           - EV-PRICE-XMOM-003
           - EV-PRICE-XMOM-004
           - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
+          - evidence/AUDIT-002-LONG-ONLY.md
 
       PRICE_TIME_SERIES_TREND:
         family: PRICE
@@ -538,41 +540,29 @@ research:
   claims: {}
 
 next_action:
-  id: AUDIT-002
+  id: AUDIT-003
   objective: >-
-    Test whether the two better-surviving factor signals from AUDIT-001 translate
-    into simple large-stock long-only portfolios rather than depending on their
-    short legs.
-  candidates:
-    FUND_QUALITY_PROFITABILITY:
-      representation: Big Robust portfolio from the Fama/French 2x3 size and operating-profitability sorts
-    PRICE_CROSS_SECTIONAL_MOMENTUM:
-      representation: Big High portfolio from the Fama/French 2x3 size and prior-return sorts
-  benchmark:
-    representation: broad U.S. market total return from Mkt-RF plus RF
+    Determine whether the surviving large-stock profitability/quality signal has
+    a realistic individually accessible implementation path after product fees,
+    methodology differences, taxes, turnover, and tracking effects, before any
+    raw-security build is justified.
+  scope:
+    candidate: FUND_QUALITY_PROFITABILITY
+    research_representation: >-
+      Fama/French Big Robust portfolio from the 2x3 size and operating-profitability sort
+    comparison_target: >-
+      Broad low-cost U.S. equity market exposure
   constraints:
-    - use_public_monthly_fama_french_research_data
-    - use_one_matched_data_vintage_when_practicable
-    - use_common_analysis_window_beginning_2016_01
-    - no_parameter_search
-    - no_strategy_optimization
-    - report_full_period_and_recent_2020_plus_results
-    - report_cagr_volatility_max_drawdown_and_monthly_benchmark_win_rate
-    - report_tracking_error_and_information_ratio_for_active_return
-    - preserve_data_vintage_and_exact_input_identity
-    - label_results_exploratory_not_confirmatory
+    - research_only
     - no_capital_deployment
-  interpretation:
-    clear_survivor: >-
-      Benchmark-relative arithmetic mean and compounded relative return are both
-      positive in both the 2016+ and 2020+ windows.
-    not_supported: >-
-      Benchmark-relative arithmetic mean and compounded relative return are both
-      nonpositive in both the 2016+ and 2020+ windows.
-    mixed: >-
-      Any other pattern.
+    - no_performance_chasing
+    - predefine_product_inclusion_rules_before_comparing_returns
+    - prefer_live_fund_history_over_backfilled_index_history
+    - separate_fee_tax_turnover_and_factor_exposure_effects
+    - do_not_treat_a_marketed_quality_label_as_equivalent_to_fama_french_operating_profitability
   completion_condition: >-
-    Each candidate is classified clear_survivor, mixed, or not_supported under
-    the frozen interpretation rule. Only a clear survivor may advance directly
-    to a more realistic investable-product or raw-security implementation audit;
-    a mixed result requires explicit justification before further research.
+    The project identifies whether at least one transparent, individually
+    accessible implementation is sufficiently close to the surviving research
+    signal and sufficiently competitive with passive market exposure to justify a
+    more expensive raw-security or prospective test. Otherwise, the active
+    implementation path is deferred.

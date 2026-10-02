@@ -1,0 +1,116 @@
+{
+  "audit": "AUDIT-002",
+  "status": "exploratory_not_confirmatory",
+  "protocol": {
+    "benchmark": "Fama/French broad U.S. market total return = Mkt-RF + RF",
+    "class_rule": {
+      "clear_survivor": "benchmark-relative arithmetic mean and compounded relative return both > 0 in both windows",
+      "mixed": "any other pattern",
+      "not_supported": "benchmark-relative arithmetic mean and compounded relative return both <= 0 in both windows"
+    },
+    "common_end": "202608",
+    "full_start": "201601",
+    "parameter_search": false,
+    "recent_start": "202001",
+    "strategy_optimization": false
+  },
+  "results": {
+    "FUND_QUALITY_PROFITABILITY": {
+      "classification": "clear_survivor",
+      "full_2016_plus": {
+        "active_annualized_arithmetic_mean": 0.01739221875,
+        "end": "202608",
+        "information_ratio": 0.47274011001947797,
+        "market_cagr": 0.15029789548458217,
+        "market_cumulative_return": 3.4529054032626885,
+        "monthly_benchmark_win_rate": 0.546875,
+        "monthly_benchmark_wins": 70,
+        "months": 128,
+        "portfolio_annualized_volatility": 0.15513460985628913,
+        "portfolio_cagr": 0.17059330960503427,
+        "portfolio_cumulative_return": 4.366169682928301,
+        "portfolio_max_drawdown": -0.24845550982848152,
+        "relative_compounded_return": 0.2050940222077151,
+        "start": "201601",
+        "tracking_error": 0.036790232902563315
+      },
+      "recent_2020_plus": {
+        "active_annualized_arithmetic_mean": 0.015099300000000003,
+        "end": "202608",
+        "information_ratio": 0.35702211027581154,
+        "market_cagr": 0.1531947964112994,
+        "market_cumulative_return": 1.5863333123255856,
+        "monthly_benchmark_win_rate": 0.5,
+        "monthly_benchmark_wins": 40,
+        "months": 80,
+        "portfolio_annualized_volatility": 0.17337125971271058,
+        "portfolio_cagr": 0.17097854608448393,
+        "portfolio_cumulative_return": 1.8641312899539573,
+        "portfolio_max_drawdown": -0.24845550982848164,
+        "relative_compounded_return": 0.10740996773481637,
+        "start": "202001",
+        "tracking_error": 0.04229233866870399
+      }
+    },
+    "PRICE_CROSS_SECTIONAL_MOMENTUM": {
+      "classification": "not_supported",
+      "full_2016_plus": {
+        "active_annualized_arithmetic_mean": -0.004884374999999991,
+        "end": "202608",
+        "information_ratio": -0.07457033326598031,
+        "market_cagr": 0.15029789548458217,
+        "market_cumulative_return": 3.4529054032626885,
+        "monthly_benchmark_win_rate": 0.484375,
+        "monthly_benchmark_wins": 62,
+        "months": 128,
+        "portfolio_annualized_volatility": 0.16775768793183882,
+        "portfolio_cagr": 0.14295630991761143,
+        "portfolio_cumulative_return": 3.1589405807009268,
+        "portfolio_max_drawdown": -0.24142692757922135,
+        "relative_compounded_return": -0.06601640860063429,
+        "start": "201601",
+        "tracking_error": 0.06550024367704267
+      },
+      "recent_2020_plus": {
+        "active_annualized_arithmetic_mean": -0.0013799999999999871,
+        "end": "202608",
+        "information_ratio": -0.01901420212746285,
+        "market_cagr": 0.1531947964112994,
+        "market_cumulative_return": 1.5863333123255856,
+        "monthly_benchmark_win_rate": 0.5125,
+        "monthly_benchmark_wins": 41,
+        "months": 80,
+        "portfolio_annualized_volatility": 0.19003204614825137,
+        "portfolio_cagr": 0.14886383381818358,
+        "portfolio_cumulative_return": 1.5222631051690039,
+        "portfolio_max_drawdown": -0.24142692757922124,
+        "relative_compounded_return": -0.02477260253009339,
+        "start": "202001",
+        "tracking_error": 0.07257732881711648
+      }
+    }
+  },
+  "sources": {
+    "ff5": {
+      "csv_sha256": "c4915afc1e2a1fce6fbba415f574d825a3e1b800c8d1aa31c72351789851eb22",
+      "member_name": "F-F_Research_Data_5_Factors_2x3.csv",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip",
+      "vintage_line": "This file was created using the 202608 CRSP database.",
+      "zip_sha256": "36756c5c2559648519ac4b22913d860c6afd865cfebce920e3e8927f8e2d10b7"
+    },
+    "mom": {
+      "csv_sha256": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+      "member_name": "6_Portfolios_ME_Prior_12_2.csv",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_Prior_12_2_CSV.zip",
+      "vintage_line": "This file was created by using the 202608 CRSP database.",
+      "zip_sha256": "68d90a218235b2c14e67eb1b7b1acd2d9fcc6b626bc4c64e854e2788bcf44bf3"
+    },
+    "op": {
+      "csv_sha256": "7a58a3eece5e69eca8c23f06cb393e52b41c9fe17ee27a9cf9f5a572bd5d7c7c",
+      "member_name": "6_Portfolios_ME_OP_2x3.csv",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_OP_2x3_CSV.zip",
+      "vintage_line": "This file was created using the 202608 CRSP database.",
+      "zip_sha256": "5974ba70b4e23e46e58bdc821fb0c93caea86f46ca50523d0622e86d7f2eba5b"
+    }
+  }
+}
