@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: finalist_implementability_synthesized
+  status: equity_factor_survivability_audited
 
   reconnaissance:
     universe_version: 1
@@ -25,6 +25,7 @@ research:
       - evidence/RECON-003-FUND-PRICE.md
       - evidence/RECON-004-EVENT-MACRO-INFO.md
       - evidence/SYNTH-001-IMPLEMENTABILITY.md
+      - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
 
     method_families:
       BENCH:
@@ -265,17 +266,19 @@ research:
         name: Systematic value and fundamentals-based valuation
         disposition: retain
         confidence: moderate
-        experiment_candidate: provisional
+        experiment_candidate: no
         rationale: >-
           Value has broad international evidence and fundamentals-based valuation
-          residuals have predicted returns beyond common controls, but long
-          horizons, drawdowns, small-stock concentration in some results, risk
-          interpretation, and direct post-publication decay reduce confidence that
-          historical magnitudes remain exploitable.
+          residuals have predicted returns beyond common controls, but the frozen
+          HML survivability audit was weak over 2016-01 through 2026-06: its
+          arithmetic mean was only slightly positive, compounded factor return was
+          negative, and maximum drawdown exceeded 50%. Value remains scientifically
+          credible but does not justify priority in the next implementation gate.
         evidence:
           - EV-FUND-VALUE-001
           - EV-FUND-VALUE-002
           - EV-FUND-VALUE-003
+          - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
 
       FUND_QUALITY_PROFITABILITY:
         family: FUND
@@ -285,13 +288,16 @@ research:
         experiment_candidate: provisional
         rationale: >-
           Profitability and composite quality signals have replicated across
-          markets and overlap less with distressed-small-stock stories than many
-          anomalies. Practical long-only capture and current after-cost magnitude
-          still require direct testing.
+          markets. In AUDIT-001, RMW remained positively compounded over both the
+          frozen 2016+ and 2020+ windows with materially lower volatility than HML
+          or Mom. The next unresolved issue is whether the premium survives in a
+          simple large-stock long-only portfolio rather than depending on the short
+          leg of a research factor.
         evidence:
           - EV-FUND-QP-001
           - EV-FUND-QP-002
           - EV-FUND-QP-003
+          - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
 
       FUND_FINANCIAL_STATEMENT_SCREENS:
         family: FUND
@@ -348,14 +354,18 @@ research:
         experiment_candidate: provisional
         rationale: >-
           Medium-horizon winner-minus-loser continuation is documented in the
-          United States and internationally and persists outside only the smallest
-          stocks, but turnover, publication-era attenuation, and rare severe
-          momentum crashes materially affect implementation.
+          United States and internationally. In AUDIT-001, Mom remained positively
+          compounded in both frozen windows and was strongest of the three tested
+          factors over 2020+. Turnover and crash risk remain material, and the
+          next unresolved issue is whether a large-stock long-only winner
+          portfolio retains useful benchmark-relative behavior without the short
+          leg.
         evidence:
           - EV-PRICE-XMOM-001
           - EV-PRICE-XMOM-002
           - EV-PRICE-XMOM-003
           - EV-PRICE-XMOM-004
+          - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
 
       PRICE_TIME_SERIES_TREND:
         family: PRICE
@@ -528,24 +538,41 @@ research:
   claims: {}
 
 next_action:
-  id: AUDIT-001
+  id: AUDIT-002
   objective: >-
-    Run one bounded exploratory post-publication survivability audit of the three
-    cheapest common-universe finalists: FUND_VALUE using HML,
-    FUND_QUALITY_PROFITABILITY using RMW, and
-    PRICE_CROSS_SECTIONAL_MOMENTUM using Mom.
+    Test whether the two better-surviving factor signals from AUDIT-001 translate
+    into simple large-stock long-only portfolios rather than depending on their
+    short legs.
+  candidates:
+    FUND_QUALITY_PROFITABILITY:
+      representation: Big Robust portfolio from the Fama/French 2x3 size and operating-profitability sorts
+    PRICE_CROSS_SECTIONAL_MOMENTUM:
+      representation: Big High portfolio from the Fama/French 2x3 size and prior-return sorts
+  benchmark:
+    representation: broad U.S. market total return from Mkt-RF plus RF
   constraints:
-    - use_public_monthly_research_data
-    - use_one_common_analysis_window_beginning_2016_01
+    - use_public_monthly_fama_french_research_data
+    - use_one_matched_data_vintage_when_practicable
+    - use_common_analysis_window_beginning_2016_01
     - no_parameter_search
     - no_strategy_optimization
     - report_full_period_and_recent_2020_plus_results
-    - measure_mean_volatility_sharpe_drawdown_and_sign_consistency
-    - treat_factor_returns_as_evidence_not_live_portfolios
+    - report_cagr_volatility_max_drawdown_and_monthly_benchmark_win_rate
+    - report_tracking_error_and_information_ratio_for_active_return
+    - preserve_data_vintage_and_exact_input_identity
     - label_results_exploratory_not_confirmatory
     - no_capital_deployment
+  interpretation:
+    clear_survivor: >-
+      Benchmark-relative arithmetic mean and compounded relative return are both
+      positive in both the 2016+ and 2020+ windows.
+    not_supported: >-
+      Benchmark-relative arithmetic mean and compounded relative return are both
+      nonpositive in both the 2016+ and 2020+ windows.
+    mixed: >-
+      Any other pattern.
   completion_condition: >-
-    The audit reports whether HML, RMW, and Mom remained directionally positive
-    over the common post-publication window and recent subperiod, quantifies their
-    risk and drawdowns, records any data-revision limitation, and determines
-    whether a more expensive independent implementation test is justified.
+    Each candidate is classified clear_survivor, mixed, or not_supported under
+    the frozen interpretation rule. Only a clear survivor may advance directly
+    to a more realistic investable-product or raw-security implementation audit;
+    a mixed result requires explicit justification before further research.
