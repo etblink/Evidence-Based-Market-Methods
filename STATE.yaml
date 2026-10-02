@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: reconnaissance_universe_frozen
+  status: first_pass_reconnaissance_complete
 
   reconnaissance:
     universe_version: 1
@@ -19,6 +19,8 @@ research:
       Partition methods primarily by information source or economic mechanism,
       not by marketing label or implementation style, to reduce overlap and
       double-counting.
+
+    evidence_snapshot: evidence/RECON-002-FIRST-PASS.md
 
     method_families:
       BENCH:
@@ -127,14 +129,139 @@ research:
         It must also present a plausible, accessible, decision-relevant path that
         can justify the required time, capital, and complexity.
 
+    preliminary_assessments:
+      BENCH:
+        disposition: benchmark_only
+        confidence: high
+        rationale: >-
+          Low-cost passive exposure is the necessary opportunity-cost baseline.
+          Persistent active-manager underperformance makes it inappropriate to
+          judge an active method only by whether it has positive raw returns.
+        evidence:
+          - EV-BENCH-001
+          - EV-BENCH-002
+
+      FUND:
+        disposition: retain
+        confidence: moderate
+        rationale: >-
+          Valuation, profitability, accounting quality, and earnings-related
+          information have substantial empirical support and coherent economic
+          links to the underlying businesses, while large anomaly-replication
+          exercises show that many individual fundamental signals do not survive.
+          The family merits decomposition rather than blanket acceptance.
+        evidence:
+          - EV-FUND-001
+          - EV-FUND-002
+          - EV-FUND-003
+          - EV-GEN-001
+
+      PRICE:
+        disposition: retain
+        confidence: high
+        rationale: >-
+          Momentum and trend persistence have unusually broad evidence, whereas
+          large-scale tests of mined technical rules show weak persistence and
+          strong cost sensitivity. Retention applies primarily because robust
+          price-based subfamilies exist, not because technical analysis as a whole
+          is validated.
+        evidence:
+          - EV-PRICE-001
+          - EV-PRICE-002
+          - EV-PRICE-003
+          - EV-PRICE-004
+
+      EVENT:
+        disposition: retain
+        confidence: moderate
+        rationale: >-
+          Post-earnings drift and merger arbitrage have documented mechanisms and
+          historical return evidence, but merger spreads embed completion and
+          crash risk and several broader corporate-event anomalies weaken under
+          better controls. Specific event types must be evaluated separately.
+        evidence:
+          - EV-EVENT-001
+          - EV-EVENT-002
+          - EV-EVENT-003
+          - EV-EVENT-004
+
+      MACRO:
+        disposition: retain
+        confidence: moderate
+        rationale: >-
+          Cross-asset carry, value, and momentum premia have meaningful evidence,
+          but generic aggregate-market forecasting has poor out-of-sample history.
+          Retention therefore concerns systematic cross-asset premia rather than
+          discretionary macro prediction in general.
+        evidence:
+          - EV-MACRO-001
+          - EV-MACRO-002
+          - EV-MACRO-003
+
+      STAT:
+        disposition: defer
+        confidence: moderate
+        rationale: >-
+          Statistical relative-value effects can exist, but realistic transaction
+          costs, shorting requirements, estimation error, and competition make
+          individual accessibility uncertain enough that this is not a current
+          priority.
+        evidence:
+          - EV-STAT-001
+          - EV-STAT-002
+
+      DERIV:
+        disposition: defer
+        confidence: high
+        rationale: >-
+          Volatility and variance risk premia are real and economically meaningful,
+          but much of the apparent return is compensation for severe adverse-state
+          risk, while option microstructure makes inference and implementation
+          unusually demanding. The family is not rejected, but it is a poor early
+          use of scarce research time.
+        evidence:
+          - EV-DERIV-001
+          - EV-DERIV-002
+          - EV-DERIV-003
+
+      MICRO:
+        disposition: defer
+        confidence: high
+        rationale: >-
+          Microstructure frictions and latency effects are real, but direct
+          exploitation depends heavily on speed, infrastructure, execution access,
+          and specialized competition. Its immediate relevance to an ordinary
+          individual is mainly execution quality rather than a primary alpha
+          program.
+        evidence:
+          - EV-MICRO-001
+          - EV-MICRO-002
+
+      INFO:
+        disposition: retain
+        confidence: low
+        rationale: >-
+          Analyst actions, news, sentiment, and specialized information sometimes
+          predict returns, and informational specialization is a plausible source
+          of individual advantage. Evidence is heterogeneous, data can be costly,
+          and modern competition may erode signals quickly, so accessibility and
+          durability remain unresolved.
+        evidence:
+          - EV-INFO-001
+          - EV-INFO-002
+          - EV-INFO-003
+
   claims: {}
 
 next_action:
-  id: RECON-002
+  id: RECON-003
   objective: >-
-    Conduct the first-pass evidence reconnaissance across the frozen method
-    families and identify which families merit deeper review.
+    Deepen FUND and PRICE side by side, decomposing each into its strongest
+    subfamilies and comparing current evidence, implementation burden, and likely
+    individual accessibility before selecting any experiment.
   completion_condition: >-
-    Each family has an evidence-grounded preliminary disposition and confidence,
-    with the strongest surviving questions identified without yet authorizing a
-    deep experiment.
+    FUND and PRICE each have a bounded subfamily map with evidence-grounded
+    dispositions, and the project can state whether either contains a candidate
+    strong enough to justify a preregistered experiment. EVENT, MACRO, and INFO
+    remain retained for later comparative review; STAT, DERIV, and MICRO remain
+    deferred unless new evidence changes their expected value.
