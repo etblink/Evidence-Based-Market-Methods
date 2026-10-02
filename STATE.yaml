@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: first_pass_reconnaissance_complete
+  status: fund_price_deepening_complete
 
   reconnaissance:
     universe_version: 1
@@ -20,7 +20,9 @@ research:
       not by marketing label or implementation style, to reduce overlap and
       double-counting.
 
-    evidence_snapshot: evidence/RECON-002-FIRST-PASS.md
+    evidence_snapshots:
+      - evidence/RECON-002-FIRST-PASS.md
+      - evidence/RECON-003-FUND-PRICE.md
 
     method_families:
       BENCH:
@@ -124,10 +126,14 @@ research:
         - low
         - insufficient
 
+      experiment_candidate_values:
+        - provisional
+        - no
+
       comparison_rule: >-
-        No family earns deep experimentation merely because an effect exists.
-        It must also present a plausible, accessible, decision-relevant path that
-        can justify the required time, capital, and complexity.
+        No family or subfamily earns deep experimentation merely because an effect
+        exists. It must also present a plausible, accessible, decision-relevant
+        path that can justify the required time, capital, and complexity.
 
     preliminary_assessments:
       BENCH:
@@ -251,17 +257,175 @@ research:
           - EV-INFO-002
           - EV-INFO-003
 
+    subfamily_assessments:
+      FUND_VALUE:
+        family: FUND
+        name: Systematic value and fundamentals-based valuation
+        disposition: retain
+        confidence: moderate
+        experiment_candidate: provisional
+        rationale: >-
+          Value has broad international evidence and fundamentals-based valuation
+          residuals have predicted returns beyond common controls, but long
+          horizons, drawdowns, small-stock concentration in some results, risk
+          interpretation, and direct post-publication decay reduce confidence that
+          historical magnitudes remain exploitable.
+        evidence:
+          - EV-FUND-VALUE-001
+          - EV-FUND-VALUE-002
+          - EV-FUND-VALUE-003
+
+      FUND_QUALITY_PROFITABILITY:
+        family: FUND
+        name: Profitability and quality
+        disposition: retain
+        confidence: high
+        experiment_candidate: provisional
+        rationale: >-
+          Profitability and composite quality signals have replicated across
+          markets and overlap less with distressed-small-stock stories than many
+          anomalies. Practical long-only capture and current after-cost magnitude
+          still require direct testing.
+        evidence:
+          - EV-FUND-QP-001
+          - EV-FUND-QP-002
+          - EV-FUND-QP-003
+
+      FUND_FINANCIAL_STATEMENT_SCREENS:
+        family: FUND
+        name: Composite financial-statement screens
+        disposition: defer
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Piotroski-style evidence shows accounting information can discriminate
+          within constrained universes, but broad finance/accounting anomaly
+          replication is weak enough that arbitrary screen construction is a
+          high-overfitting path. Revisit only if a specific robust screen survives
+          the broader candidate comparison.
+        evidence:
+          - EV-FUND-FS-001
+          - EV-FUND-FS-002
+
+      FUND_EARNINGS_REVISION:
+        family: FUND
+        name: Earnings surprise and revision underreaction
+        disposition: retain
+        confidence: high
+        experiment_candidate: provisional
+        rationale: >-
+          Post-earnings-announcement and forecast-revision drift have unusually
+          deep literatures and plausible underreaction mechanisms. Accessibility,
+          data timing, turnover, and contemporary attenuation remain the main
+          unresolved implementation questions.
+        evidence:
+          - EV-FUND-ER-001
+          - EV-FUND-ER-002
+
+      FUND_DISCRETIONARY_STOCK_PICKING:
+        family: FUND
+        name: Discretionary intrinsic-value stock picking
+        disposition: defer
+        confidence: high
+        experiment_candidate: no
+        rationale: >-
+          Some professional-manager evidence is consistent with genuine stock-
+          picking skill, but aggregate active-manager persistence is weak and no
+          generic rule identifies such skill ex ante. The method is also expensive
+          in human attention and difficult to falsify cleanly without a much more
+          specific process.
+        evidence:
+          - EV-FUND-DISC-001
+          - EV-FUND-DISC-002
+
+      PRICE_CROSS_SECTIONAL_MOMENTUM:
+        family: PRICE
+        name: Cross-sectional momentum
+        disposition: retain
+        confidence: high
+        experiment_candidate: provisional
+        rationale: >-
+          Medium-horizon winner-minus-loser continuation is documented in the
+          United States and internationally and persists outside only the smallest
+          stocks, but turnover, publication-era attenuation, and rare severe
+          momentum crashes materially affect implementation.
+        evidence:
+          - EV-PRICE-XMOM-001
+          - EV-PRICE-XMOM-002
+          - EV-PRICE-XMOM-003
+          - EV-PRICE-XMOM-004
+
+      PRICE_TIME_SERIES_TREND:
+        family: PRICE
+        name: Time-series momentum and diversified trend
+        disposition: retain
+        confidence: high
+        experiment_candidate: provisional
+        rationale: >-
+          Trend evidence spans many asset classes and unusually long historical
+          samples. However, volatility scaling explains part of reported alpha and
+          direct replication can require futures, short exposure, leverage, and
+          diversified execution beyond a simple retail chart rule.
+        evidence:
+          - EV-PRICE-TSMOM-001
+          - EV-PRICE-TSMOM-002
+          - EV-PRICE-TSMOM-003
+
+      PRICE_SHORT_TERM_REVERSAL:
+        family: PRICE
+        name: Short-term reversal
+        disposition: retain
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Cost-aware historical work and a recent global industry-adjusted result
+          suggest the effect can survive modeled trading costs, but it remains
+          turnover-intensive and implementation-sensitive enough to rank behind
+          slower candidate signals for an individual's first experiment.
+        evidence:
+          - EV-PRICE-SREV-001
+          - EV-PRICE-SREV-002
+
+      PRICE_LONG_TERM_REVERSAL:
+        family: PRICE
+        name: Long-term reversal
+        disposition: defer
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          International evidence supports a long-horizon reversal effect, but
+          strength is often concentrated in small stocks or unstable across time.
+          The practical case is weaker than value and medium-term momentum.
+        evidence:
+          - EV-PRICE-LREV-001
+          - EV-PRICE-LREV-002
+
+      PRICE_CLASSICAL_TECHNICAL_RULES:
+        family: PRICE
+        name: Classical chart patterns and indicator-rule mining
+        disposition: defer
+        confidence: high
+        experiment_candidate: no
+        rationale: >-
+          Objectively defined chart patterns can contain incremental information,
+          but information content has not translated into comparably strong
+          evidence of durable net profitability. Large-scale rule testing shows
+          severe selection, cost, and out-of-sample persistence problems.
+        evidence:
+          - EV-PRICE-RULE-001
+          - EV-PRICE-RULE-002
+
   claims: {}
 
 next_action:
-  id: RECON-003
+  id: RECON-004
   objective: >-
-    Deepen FUND and PRICE side by side, decomposing each into its strongest
-    subfamilies and comparing current evidence, implementation burden, and likely
-    individual accessibility before selecting any experiment.
+    Deepen the remaining retained families EVENT, MACRO, and INFO just enough to
+    determine whether any subfamily deserves to displace or join the provisional
+    FUND and PRICE experiment candidates.
   completion_condition: >-
-    FUND and PRICE each have a bounded subfamily map with evidence-grounded
-    dispositions, and the project can state whether either contains a candidate
-    strong enough to justify a preregistered experiment. EVENT, MACRO, and INFO
-    remain retained for later comparative review; STAT, DERIV, and MICRO remain
-    deferred unless new evidence changes their expected value.
+    EVENT, MACRO, and INFO have bounded subfamily assessments under the same
+    screening protocol, after which the project can form a cross-family finalist
+    set without having overlooked another retained method family. STAT, DERIV, and
+    MICRO remain deferred unless new evidence materially changes their expected
+    value.
