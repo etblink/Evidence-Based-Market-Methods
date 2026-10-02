@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: retained_family_deepening_complete
+  status: finalist_implementability_synthesized
 
   reconnaissance:
     universe_version: 1
@@ -24,6 +24,7 @@ research:
       - evidence/RECON-002-FIRST-PASS.md
       - evidence/RECON-003-FUND-PRICE.md
       - evidence/RECON-004-EVENT-MACRO-INFO.md
+      - evidence/SYNTH-001-IMPLEMENTABILITY.md
 
     method_families:
       BENCH:
@@ -527,14 +528,24 @@ research:
   claims: {}
 
 next_action:
-  id: SYNTH-001
+  id: AUDIT-001
   objective: >-
-    Compare every subfamily marked as a provisional experiment candidate on
-    individual implementability, data requirements, turnover and costs, capital
-    requirements, test duration, risk, expected information gain, and ongoing
-    time burden, using passive exposure as the benchmark.
+    Run one bounded exploratory post-publication survivability audit of the three
+    cheapest common-universe finalists: FUND_VALUE using HML,
+    FUND_QUALITY_PROFITABILITY using RMW, and
+    PRICE_CROSS_SECTIONAL_MOMENTUM using Mom.
+  constraints:
+    - use_public_monthly_research_data
+    - use_one_common_analysis_window_beginning_2016_01
+    - no_parameter_search
+    - no_strategy_optimization
+    - report_full_period_and_recent_2020_plus_results
+    - measure_mean_volatility_sharpe_drawdown_and_sign_consistency
+    - treat_factor_returns_as_evidence_not_live_portfolios
+    - label_results_exploratory_not_confirmatory
+    - no_capital_deployment
   completion_condition: >-
-    The project selects the smallest set of finalist implementations whose tests
-    could realistically change an allocation of time or capital, or concludes
-    that no candidate justifies an experiment. No live capital deployment is
-    authorized by this synthesis.
+    The audit reports whether HML, RMW, and Mom remained directionally positive
+    over the common post-publication window and recent subperiod, quantifies their
+    risk and drawdowns, records any data-revision limitation, and determines
+    whether a more expensive independent implementation test is justified.
