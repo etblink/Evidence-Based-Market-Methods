@@ -1,0 +1,27 @@
+schema_version: 1
+
+project:
+  name: Evidence-Based Market Methods
+  status: active
+  phase: reconnaissance
+  objective: >-
+    Determine which, if any, market methods are sufficiently evidence-supported,
+    economically exploitable, and practically accessible to an individual to
+    merit further experimentation or real-world consideration, given finite time
+    and capital.
+
+research:
+  status: initialized
+  methods: {}
+  claims: {}
+  decisions: {}
+
+next_action:
+  id: RECON-001
+  objective: >-
+    Construct and freeze a bounded cross-method reconnaissance universe before
+    selecting any method for deep experimentation.
+  completion_condition: >-
+    The major candidate method families and a bounded comparative reconnaissance
+    plan are represented canonically, with no method prematurely selected for
+    deep experimentation.
