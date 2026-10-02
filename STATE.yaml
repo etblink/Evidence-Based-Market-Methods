@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: fund_price_deepening_complete
+  status: retained_family_deepening_complete
 
   reconnaissance:
     universe_version: 1
@@ -23,6 +23,7 @@ research:
     evidence_snapshots:
       - evidence/RECON-002-FIRST-PASS.md
       - evidence/RECON-003-FUND-PRICE.md
+      - evidence/RECON-004-EVENT-MACRO-INFO.md
 
     method_families:
       BENCH:
@@ -415,17 +416,125 @@ research:
           - EV-PRICE-RULE-001
           - EV-PRICE-RULE-002
 
+
+      EVENT_MERGER_ARBITRAGE:
+        family: EVENT
+        name: Merger and acquisition arbitrage
+        disposition: retain
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Merger spreads have a coherent mechanism and historical after-cost
+          return evidence, but compensation is tied to completion risk, financing
+          constraints, and severe downside states. The method also demands
+          transaction-specific monitoring, so it does not currently outrank the
+          slower and simpler provisional candidates.
+        evidence:
+          - EV-EVENT-MA-001
+          - EV-EVENT-MA-002
+
+      EVENT_SPINOFFS:
+        family: EVENT
+        name: Spinoffs and restructuring
+        disposition: defer
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Historical abnormal returns exist, but early evidence is conditional on
+          takeover activity and long-horizon event-study inference is
+          method-sensitive. The current evidentiary base is not clean enough to
+          justify a first experiment.
+        evidence:
+          - EV-EVENT-SPIN-001
+
+      EVENT_REPURCHASES:
+        family: EVENT
+        name: Post-repurchase underreaction
+        disposition: defer
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Repurchase announcements can convey undervaluation information, but
+          claimed long-run abnormal returns are sensitive to event-study
+          methodology and often weaken under better-specified calendar-time tests.
+        evidence:
+          - EV-EVENT-REP-001
+
+      MACRO_CARRY_TERM:
+        family: MACRO
+        name: Carry and term-structure premia
+        disposition: retain
+        confidence: moderate
+        experiment_candidate: no
+        rationale: >-
+          Carry has broad cross-asset evidence and a coherent return mechanism,
+          but common recession, liquidity, and volatility exposures indicate
+          meaningful adverse-state risk. Recent evidence of substantial
+          post-publication decay in influential currency carry rules further
+          weakens the case for making it the first individual experiment.
+        evidence:
+          - EV-MACRO-CT-001
+          - EV-MACRO-CT-002
+
+      MACRO_DIRECTIONAL_FORECASTING:
+        family: MACRO
+        name: Directional macro market timing
+        disposition: defer
+        confidence: high
+        experiment_candidate: no
+        rationale: >-
+          Extended predictor reviews and modern machine-learning tests show that
+          strong in-sample aggregate-return forecasts frequently fail out of
+          sample. A small set of predictors survives, so predictability is not
+          rejected in principle, but generic macro timing is a poor first research
+          allocation.
+        evidence:
+          - EV-MACRO-DF-001
+          - EV-MACRO-DF-002
+
+      INFO_ANALYST_ACTIONS:
+        family: INFO
+        name: Analyst attention and action signals
+        disposition: retain
+        confidence: low
+        experiment_candidate: no
+        rationale: >-
+          Analyst behavior can contain information about expected returns and
+          future fundamentals, but constructing abnormal-attention signals
+          requires specialized data and modeling and may overlap with already
+          retained fundamental signals. It remains interesting without currently
+          warranting a separate experiment.
+        evidence:
+          - EV-INFO-AA-001
+
+      INFO_NEWS_SENTIMENT:
+        family: INFO
+        name: News and sentiment processing
+        disposition: defer
+        confidence: high
+        experiment_candidate: no
+        rationale: >-
+          Textual news and sentiment clearly contain price-relevant information,
+          but the most directly predictive versions operate at horizons where
+          proprietary data, automated processing, spreads, and execution speed are
+          central. That accessibility profile is unattractive for the first
+          individual experiment.
+        evidence:
+          - EV-INFO-NS-001
+          - EV-INFO-NS-002
+          - EV-INFO-NS-003
+
   claims: {}
 
 next_action:
-  id: RECON-004
+  id: SYNTH-001
   objective: >-
-    Deepen the remaining retained families EVENT, MACRO, and INFO just enough to
-    determine whether any subfamily deserves to displace or join the provisional
-    FUND and PRICE experiment candidates.
+    Compare every subfamily marked as a provisional experiment candidate on
+    individual implementability, data requirements, turnover and costs, capital
+    requirements, test duration, risk, expected information gain, and ongoing
+    time burden, using passive exposure as the benchmark.
   completion_condition: >-
-    EVENT, MACRO, and INFO have bounded subfamily assessments under the same
-    screening protocol, after which the project can form a cross-family finalist
-    set without having overlooked another retained method family. STAT, DERIV, and
-    MICRO remain deferred unless new evidence materially changes their expected
-    value.
+    The project selects the smallest set of finalist implementations whose tests
+    could realistically change an allocation of time or capital, or concludes
+    that no candidate justifies an experiment. No live capital deployment is
+    authorized by this synthesis.
