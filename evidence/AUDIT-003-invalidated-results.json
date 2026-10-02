@@ -1,0 +1,24 @@
+{
+  "audit": "AUDIT-003",
+  "status": "invalidated_by_official_return_crosscheck",
+  "workflow_run": 37079076596,
+  "workflow_head": "55177538b144b234561f106543cccaa95673b6db",
+  "artifact_digest": "sha256:f9f5cf1197943d88acf0edcf91d6d049ae8c2a3b7dadd64cc46e0be63a29ba12",
+  "frozen_output": {
+    "QUAL": {"classification": "implementation_not_supported", "active_annualized_arithmetic_mean": -0.0076986398957370064, "benchmark_relative_compounded_return": -0.048520172840850306},
+    "SPHQ": {"classification": "implementation_not_supported", "active_annualized_arithmetic_mean": -0.0018833065836608338, "benchmark_relative_compounded_return": -0.0011407860799748093},
+    "JQUA": {"classification": "implementation_survivor", "active_annualized_arithmetic_mean": 0.001717973269362035, "benchmark_relative_compounded_return": 0.02776039513565598},
+    "FQAL": {"classification": "implementation_not_supported", "active_annualized_arithmetic_mean": -0.008220348775359524, "benchmark_relative_compounded_return": -0.043441544079961036}
+  },
+  "integrity_disposition": {
+    "accepted_as_canonical": false,
+    "reason": "Common Yahoo adjusted-close source failed official-return cross-check for SPHQ; cohort classification therefore cannot be promoted.",
+    "official_2020_2025_reconciliation": {
+      "VTI_compounded_return": 1.2367582066012592,
+      "JQUA_NAV_compounded_return": 1.1952355593172004,
+      "JQUA_relative_to_VTI": -0.01856376212749089,
+      "SPHQ_NAV_compounded_return": 1.2443330066531102,
+      "SPHQ_relative_to_VTI": 0.003386508219572315
+    }
+  }
+}

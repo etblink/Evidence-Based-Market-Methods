@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: audit_003_product_universe_frozen
+  status: audit_003_closed_weak_product_evidence
 
   reconnaissance:
     universe_version: 1
@@ -28,6 +28,7 @@ research:
       - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
       - evidence/AUDIT-002-LONG-ONLY.md
       - evidence/AUDIT-003-PRODUCT-UNIVERSE.md
+      - evidence/AUDIT-003-DATA-INTEGRITY.md
 
     method_families:
       BENCH:
@@ -287,20 +288,25 @@ research:
         name: Profitability and quality
         disposition: retain
         confidence: high
-        experiment_candidate: provisional
+        experiment_candidate: no
         rationale: >-
-          Profitability and composite quality signals have replicated across
-          markets. AUDIT-001 found a positive RMW factor result, and the frozen
-          AUDIT-002 long-only gate classified the large-stock robust-profitability
-          portfolio as a clear survivor against the broad U.S. market in both the
-          2016+ and 2020+ windows. This justifies one more implementation-focused
-          audit, not capital deployment.
+          Profitability and composite quality signals have strong research support,
+          and AUDIT-002 found a clear long-only large-stock research-portfolio
+          result. AUDIT-003, however, did not produce robust product-level evidence
+          sufficient to justify an expensive raw-security replication. The frozen
+          Yahoo ETF gate was invalidated by an official-return cross-check failure
+          for SPHQ; official 2020-2025 returns place JQUA modestly behind VTI and
+          SPHQ only slightly ahead. The accessible implementation edge is therefore
+          weak and source/period sensitive. Retain the method scientifically but
+          defer deeper implementation work.
         evidence:
           - EV-FUND-QP-001
           - EV-FUND-QP-002
           - EV-FUND-QP-003
           - evidence/AUDIT-001-FACTOR-SURVIVABILITY.md
           - evidence/AUDIT-002-LONG-ONLY.md
+          - evidence/AUDIT-003-PRODUCT-UNIVERSE.md
+          - evidence/AUDIT-003-DATA-INTEGRITY.md
 
       FUND_FINANCIAL_STATEMENT_SCREENS:
         family: FUND
@@ -541,118 +547,20 @@ research:
   claims: {}
 
 next_action:
-  id: AUDIT-003
+  id: SYNTH-002
   objective: >-
-    Determine whether the surviving large-stock profitability/quality signal has
-    a realistic individually accessible implementation path after product fees,
-    methodology differences, taxes, turnover, and tracking effects, before any
-    raw-security build is justified.
-  scope:
-    candidate: FUND_QUALITY_PROFITABILITY
-    research_representation: >-
-      Fama/French Big Robust portfolio from the 2x3 size and operating-profitability sort
-    comparison_target: >-
-      Vanguard Total Stock Market ETF (VTI) as a low-cost broad U.S. equity
-      implementation benchmark for product-level live comparisons.
-  product_inclusion_rules:
-    frozen_before_return_comparison: true
-    eligible_vehicle: >-
-      U.S.-listed ETF available to an ordinary individual investor, long-only,
-      unlevered, and diversified across U.S. equities.
-    methodology_requirement: >-
-      The official current methodology must make profitability, financial quality,
-      earnings quality, or closely related financial-strength measures a primary
-      security-selection or weighting input. A marketing label containing
-      "quality" is insufficient by itself.
-    exclusions:
-      - sector_or_industry_themes
-      - leveraged_or_inverse_funds
-      - derivative_first_strategies
-      - dividend_or_value_strategies_where_quality_is_only_a_secondary_filter
-      - opaque_discretionary_stock_picking_without_a_repeatable_public_methodology
-    cost_ceiling:
-      net_expense_ratio_maximum: 0.0030
-    methodology_proximity:
-      A: >-
-        Profitability or operating/gross profitability is itself a principal
-        selection or weighting signal and the portfolio is predominantly large
-        U.S. equities.
-      B: >-
-        Profitability is one principal component of a broader transparent quality
-        composite, such as profitability plus earnings quality, leverage, or
-        stability.
-      C: >-
-        The vehicle is marketed as quality but its construction is materially
-        different from the Fama/French profitability concept or dominated by
-        unrelated factors. Tier C may be documented but cannot alone justify a
-        deeper profitability implementation test.
-    live_comparison_cohort: >-
-      For the frozen 2020+ return comparison, require inception on or before
-      2019-12-31 and no material methodology change after 2019-12-31. Newer
-      eligible funds may be assessed for implementation proximity and cost but
-      cannot determine the live-performance gate.
-    benchmark_rule: >-
-      Compare eligible live-cohort funds with VTI using realized total returns
-      over the common period beginning 2020-01. Do not use backfilled index
-      returns as a substitute for live fund history.
+    Compare the two remaining serious but untested provisional candidates,
+    FUND_EARNINGS_REVISION and PRICE_TIME_SERIES_TREND, on current empirical
+    support, data accessibility, implementation burden, costs, and the cheapest
+    falsifiable individual-level test before authorizing another experiment.
   constraints:
     - research_only
     - no_capital_deployment
-    - no_performance_chasing
-    - predefine_product_inclusion_rules_before_comparing_returns
-    - prefer_live_fund_history_over_backfilled_index_history
-    - separate_fee_tax_turnover_and_factor_exposure_effects
-    - do_not_treat_a_marketed_quality_label_as_equivalent_to_fama_french_operating_profitability
-  interpretation:
-    implementation_survivor: >-
-      At least one Tier A or Tier B live-cohort fund has after-fee live total
-      return with both positive benchmark-relative arithmetic mean and positive
-      compounded relative return versus VTI over the frozen 2020+ window, while
-      remaining within the cost ceiling and without a material methodology change.
-    implementation_not_supported: >-
-      No Tier A or Tier B live-cohort fund satisfies the implementation_survivor
-      rule.
-  performance_protocol:
-    frozen_cohort:
-      - QUAL
-      - SPHQ
-      - JQUA
-      - FQAL
-    benchmark: VTI
-    source: >-
-      Yahoo Finance chart API adjusted-close series, retrieved in one run and
-      preserved with raw response hashes. Adjusted close is used as the practical
-      total-return proxy; official fund-reported annual returns will be used only
-      as a cross-check, not substituted selectively.
-    window:
-      start_month: 2020-01
-      end_month: 2026-09
-    frequency: monthly
-    return_construction: >-
-      Use month-end adjusted closes; each monthly return is the ratio of the
-      current month-end adjusted close to the prior month-end adjusted close minus
-      one. Require all five tickers to have observations for the same months.
-    metrics:
-      - annualized_arithmetic_mean
-      - cagr
-      - annualized_volatility
-      - max_drawdown
-      - benchmark_relative_arithmetic_mean
-      - benchmark_relative_compounded_return
-      - tracking_error
-      - information_ratio
-      - monthly_benchmark_win_rate
-    data_integrity:
-      - preserve_raw_response_sha256
-      - preserve_first_and_last_observation_dates
-      - fail_if_common_months_are_missing_inside_the_window
-      - no_parameter_search
-      - no_ticker_substitution
-      - no_selective_end_date
-      - cross_check_selected_calendar_year_returns_against_official_fund_reports
+    - no_paid_data_purchase_without_explicit_owner_authorization
+    - prefer_a_single_bounded_comparative_gate_over_parallel_research_projects
+    - distinguish_effect_existence_from_individual_exploitability
+    - stop_if_neither_candidate_has_expected_decision_value_above_passive_exposure
   completion_condition: >-
-    The project identifies whether at least one transparent, individually
-    accessible implementation is sufficiently close to the surviving research
-    signal and sufficiently competitive with passive market exposure to justify a
-    more expensive raw-security or prospective test. Otherwise, the active
-    implementation path is deferred.
+    The project identifies whether earnings underreaction, diversified trend, both,
+    or neither merits the next bounded experiment. The comparison must explicitly
+    account for the opportunity cost of research time and implementation complexity.
