@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: earnings_vs_trend_synthesized
+  status: audit_004_stage_a_clear_survivor
 
   reconnaissance:
     universe_version: 1
@@ -30,6 +30,7 @@ research:
       - evidence/AUDIT-003-PRODUCT-UNIVERSE.md
       - evidence/AUDIT-003-DATA-INTEGRITY.md
       - evidence/SYNTH-002-EARNINGS-VS-TREND.md
+      - evidence/AUDIT-004-STAGE-A.md
 
     method_families:
       BENCH:
@@ -596,15 +597,42 @@ next_action:
         Any other pattern.
   stage_b:
     authorization_rule: >-
-      Run only if stage_a is clear_survivor. If stage_a is mixed, stop and require
-      explicit decision-value justification before any product test. If
-      not_supported, defer the trend implementation path.
+      Authorized because Stage A is a clear_survivor under the rule frozen before
+      AQR data inspection.
     candidate: KMLM
     purpose: >-
       Determine whether a transparent long-term-moving-average trend ETF preserves
-      economically meaningful positive excess returns after its 0.90% fund cost
-      and implementation drag.
+      positive investor-level returns after its product expense and implementation
+      drag, without using third-party adjusted-price data as the primary source.
+    primary_source: >-
+      KraneShares official KMLM performance table and current official fund
+      documents.
+    performance_fields:
+      - nav_3_year_annualized
+      - nav_5_year_annualized
+      - nav_since_inception_annualized
+      - index_3_year_annualized
+      - index_5_year_annualized
+      - index_since_inception_annualized
+    interpretation:
+      implementation_survivor: >-
+        KMLM official NAV annualized return is strictly positive for every
+        available 3-year, 5-year, and since-inception standardized period.
+      implementation_not_supported: >-
+        One or more of those available official NAV annualized returns is
+        nonpositive.
+    implementation_drag: >-
+      Report the annualized difference between the official index return and NAV
+      return for each common standardized period. Do not impose an after-the-fact
+      pass threshold on that gap.
+    constraints:
+      - use_official_provider_returns_as_primary_evidence
+      - preserve_report_date_and_source
+      - verify_current_expense_ratio_and_methodology
+      - do_not_use_backfilled_pre_inception_fund_returns
+      - do_not_treat_kmlm_as_identical_to_aqr_tsmom
+      - no_capital_deployment
   completion_condition: >-
-    Stage A produces a frozen disposition. Stage B is entered only under the
-    predeclared authorization rule. No licensed futures-data purchase or direct
-    futures implementation is authorized.
+    Stage B records a frozen implementation disposition, current methodology and
+    cost, and the observed index-to-NAV implementation gap. No licensed futures
+    data purchase or direct futures implementation is authorized by this audit.
