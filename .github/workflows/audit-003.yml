@@ -1,0 +1,36 @@
+name: AUDIT-003 live ETF gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/audit_003.py"
+      - ".github/workflows/audit-003.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run frozen AUDIT-003
+        run: python tools/audit_003.py
+
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-003-results
+          path: audit-output/
+          if-no-files-found: error
+          retention-days: 30
