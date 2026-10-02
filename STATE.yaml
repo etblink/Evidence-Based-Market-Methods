@@ -11,17 +11,130 @@ project:
     and capital.
 
 research:
-  status: initialized
-  methods: {}
+  status: reconnaissance_universe_frozen
+
+  reconnaissance:
+    universe_version: 1
+    classification_principle: >-
+      Partition methods primarily by information source or economic mechanism,
+      not by marketing label or implementation style, to reduce overlap and
+      double-counting.
+
+    method_families:
+      BENCH:
+        name: Passive market exposure
+        role: benchmark
+        scope: >-
+          Broad, low-cost market exposure used as the default opportunity-cost
+          comparator for active methods.
+
+      FUND:
+        name: Fundamental corporate information
+        role: candidate
+        scope: >-
+          Methods based on business economics, valuation, accounting information,
+          profitability, quality, investment, earnings, revisions, and related
+          company fundamentals; includes both discretionary intrinsic-value work
+          and systematic fundamental signals.
+
+      PRICE:
+        name: Price and volume dynamics
+        role: candidate
+        scope: >-
+          Methods based primarily on historical prices, returns, volume, or market
+          action, including momentum, trend, mean reversion, breakouts, indicators,
+          chart patterns, and discretionary technical analysis.
+
+      EVENT:
+        name: Event-driven and special situations
+        role: candidate
+        scope: >-
+          Methods centered on identifiable corporate or market events such as
+          mergers, spinoffs, restructurings, tender offers, earnings events, and
+          other discrete catalysts.
+
+      MACRO:
+        name: Macro and cross-asset premia
+        role: candidate
+        scope: >-
+          Methods based on macroeconomic conditions, rates, inflation, growth,
+          currencies, commodities, carry, term structure, valuation, and tactical
+          allocation across asset classes.
+
+      STAT:
+        name: Statistical and relative-value relationships
+        role: candidate
+        scope: >-
+          Methods based on repeatable statistical relationships among securities
+          or markets, including pairs, cross-sectional models, mean-reverting
+          spreads, statistical arbitrage, and other relative-value structures not
+          better classified by a more specific information source.
+
+      DERIV:
+        name: Derivatives and volatility
+        role: candidate
+        scope: >-
+          Methods whose primary edge or risk exposure arises from options,
+          volatility, skew, term structure, convexity, dispersion, or related
+          derivative pricing relationships.
+
+      MICRO:
+        name: Microstructure and liquidity
+        role: candidate
+        scope: >-
+          Methods based on spreads, order flow, liquidity provision, execution,
+          latency, market making, or short-horizon market microstructure effects.
+
+      INFO:
+        name: Specialized information and alternative data
+        role: candidate
+        scope: >-
+          Methods based on domain expertise, underfollowed securities, primary
+          research, news or sentiment processing, positioning or flow data,
+          alternative datasets, or other informational advantages not captured
+          above.
+
+    screening_protocol:
+      purpose: >-
+        Eliminate weak or impractical branches cheaply before authorizing deep
+        experiments.
+
+      dimensions:
+        - empirical_reality
+        - plausible_mechanism
+        - out_of_sample_and_post_publication_robustness
+        - net_economics_after_costs_and_risk
+        - individual_accessibility
+        - time_and_learning_cost
+        - scalability_and_capacity
+        - testability
+        - benchmark_comparison
+
+      allowed_dispositions:
+        - retain
+        - defer
+        - reject
+        - benchmark_only
+
+      allowed_confidence:
+        - high
+        - moderate
+        - low
+        - insufficient
+
+      comparison_rule: >-
+        No family earns deep experimentation merely because an effect exists.
+        It must also present a plausible, accessible, decision-relevant path that
+        can justify the required time, capital, and complexity.
+
   claims: {}
-  decisions: {}
 
 next_action:
-  id: RECON-001
+  id: RECON-002
   objective: >-
-    Construct and freeze a bounded cross-method reconnaissance universe before
-    selecting any method for deep experimentation.
+    Conduct the first-pass evidence reconnaissance across the frozen method
+    families and identify which families merit deeper review.
   completion_condition: >-
-    The major candidate method families and a bounded comparative reconnaissance
-    plan are represented canonically, with no method prematurely selected for
-    deep experimentation.
+    Each family has an evidence-grounded preliminary disposition and confidence,
+    with the strongest surviving questions identified without yet authorizing a
+    deep experiment.
