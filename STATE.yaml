@@ -551,7 +551,49 @@ next_action:
     research_representation: >-
       Fama/French Big Robust portfolio from the 2x3 size and operating-profitability sort
     comparison_target: >-
-      Broad low-cost U.S. equity market exposure
+      Vanguard Total Stock Market ETF (VTI) as a low-cost broad U.S. equity
+      implementation benchmark for product-level live comparisons.
+  product_inclusion_rules:
+    frozen_before_return_comparison: true
+    eligible_vehicle: >-
+      U.S.-listed ETF available to an ordinary individual investor, long-only,
+      unlevered, and diversified across U.S. equities.
+    methodology_requirement: >-
+      The official current methodology must make profitability, financial quality,
+      earnings quality, or closely related financial-strength measures a primary
+      security-selection or weighting input. A marketing label containing
+      "quality" is insufficient by itself.
+    exclusions:
+      - sector_or_industry_themes
+      - leveraged_or_inverse_funds
+      - derivative_first_strategies
+      - dividend_or_value_strategies_where_quality_is_only_a_secondary_filter
+      - opaque_discretionary_stock_picking_without_a_repeatable_public_methodology
+    cost_ceiling:
+      net_expense_ratio_maximum: 0.0030
+    methodology_proximity:
+      A: >-
+        Profitability or operating/gross profitability is itself a principal
+        selection or weighting signal and the portfolio is predominantly large
+        U.S. equities.
+      B: >-
+        Profitability is one principal component of a broader transparent quality
+        composite, such as profitability plus earnings quality, leverage, or
+        stability.
+      C: >-
+        The vehicle is marketed as quality but its construction is materially
+        different from the Fama/French profitability concept or dominated by
+        unrelated factors. Tier C may be documented but cannot alone justify a
+        deeper profitability implementation test.
+    live_comparison_cohort: >-
+      For the frozen 2020+ return comparison, require inception on or before
+      2019-12-31 and no material methodology change after 2019-12-31. Newer
+      eligible funds may be assessed for implementation proximity and cost but
+      cannot determine the live-performance gate.
+    benchmark_rule: >-
+      Compare eligible live-cohort funds with VTI using realized total returns
+      over the common period beginning 2020-01. Do not use backfilled index
+      returns as a substitute for live fund history.
   constraints:
     - research_only
     - no_capital_deployment
@@ -560,6 +602,15 @@ next_action:
     - prefer_live_fund_history_over_backfilled_index_history
     - separate_fee_tax_turnover_and_factor_exposure_effects
     - do_not_treat_a_marketed_quality_label_as_equivalent_to_fama_french_operating_profitability
+  interpretation:
+    implementation_survivor: >-
+      At least one Tier A or Tier B live-cohort fund has after-fee live total
+      return with both positive benchmark-relative arithmetic mean and positive
+      compounded relative return versus VTI over the frozen 2020+ window, while
+      remaining within the cost ceiling and without a material methodology change.
+    implementation_not_supported: >-
+      No Tier A or Tier B live-cohort fund satisfies the implementation_survivor
+      rule.
   completion_condition: >-
     The project identifies whether at least one transparent, individually
     accessible implementation is sufficiently close to the surviving research
