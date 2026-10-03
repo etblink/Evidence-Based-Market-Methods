@@ -11,7 +11,7 @@ project:
     and capital.
 
 research:
-  status: audit_004_stage_a_clear_survivor
+  status: historical_reconnaissance_complete
 
   reconnaissance:
     universe_version: 1
@@ -31,6 +31,8 @@ research:
       - evidence/AUDIT-003-DATA-INTEGRITY.md
       - evidence/SYNTH-002-EARNINGS-VS-TREND.md
       - evidence/AUDIT-004-STAGE-A.md
+      - evidence/AUDIT-004-STAGE-B.md
+      - evidence/SYNTH-003-HISTORICAL-STOP.md
 
     method_families:
       BENCH:
@@ -386,20 +388,24 @@ research:
         name: Time-series momentum and diversified trend
         disposition: retain
         confidence: moderate
-        experiment_candidate: provisional
+        experiment_candidate: no
         rationale: >-
-          Trend evidence spans many asset classes and unusually long histories,
-          but volatility-scaling critiques and recent bootstrap-based replication
-          challenges make post-publication survivability an open empirical
-          question. Unlike earnings underreaction, the classic AQR TSMOM factor is
-          publicly updated and a transparent retail trend vehicle exists, so the
-          claim can be screened cheaply before any licensed futures data or
-          infrastructure is justified.
+          Diversified trend is the strongest accessible surviving candidate from
+          the completed historical program. AUDIT-004 Stage A found the official
+          AQR aggregate TSMOM factor positive in both the frozen 2013+ and 2020+
+          windows. Stage B then found KMLM, a transparent long-term-moving-average
+          managed-futures ETF, positive over every predeclared standardized NAV
+          horizon currently available. Implementation drag versus the underlying
+          index is material and multi-year weak periods remain possible, so this
+          evidence does not authorize capital deployment or establish a guaranteed
+          premium.
         evidence:
           - EV-PRICE-TSMOM-001
           - EV-PRICE-TSMOM-002
           - EV-PRICE-TSMOM-003
           - evidence/SYNTH-002-EARNINGS-VS-TREND.md
+          - evidence/AUDIT-004-STAGE-A.md
+          - evidence/AUDIT-004-STAGE-B.md
 
       PRICE_SHORT_TERM_REVERSAL:
         family: PRICE
@@ -556,83 +562,29 @@ research:
   claims: {}
 
 next_action:
-  id: AUDIT-004
+  id: HOLD-001
   objective: >-
-    Test whether the classic diversified time-series-momentum factor survived
-    publication strongly enough to justify an implementation-level managed-futures
-    audit.
-  stage_a:
-    representation: >-
-      AQR Time Series Momentum Factors, Monthly; diversified aggregate factor from
-      the updated public data set associated with Moskowitz, Ooi, and Pedersen
-      (2012).
-    data_source: >-
-      AQR public Time Series Momentum: Factors, Monthly data set, with exact
-      downloaded file hash and vintage preserved.
-    windows:
-      post_publication:
-        start: 2013-01
-        end: latest_common_published_month
-      recent:
-        start: 2020-01
-        end: latest_common_published_month
-    constraints:
-      - use_published_factor_without_parameter_changes
-      - no_signal_optimization
-      - no_lookback_search
-      - no_asset_class_selection
-      - report_annualized_arithmetic_mean_volatility_sharpe_cumulative_return_and_max_drawdown
-      - report_calendar_year_signs
-      - factor_returns_are_research_evidence_not_investable_returns
-      - label_exploratory_not_confirmatory
-      - no_capital_deployment
-    interpretation:
-      clear_survivor: >-
-        Annualized arithmetic mean and compounded return are both positive in both
-        the 2013+ post-publication window and the 2020+ recent window.
-      not_supported: >-
-        Annualized arithmetic mean and compounded return are both nonpositive in
-        both windows.
-      mixed: >-
-        Any other pattern.
-  stage_b:
-    authorization_rule: >-
-      Authorized because Stage A is a clear_survivor under the rule frozen before
-      AQR data inspection.
-    candidate: KMLM
-    purpose: >-
-      Determine whether a transparent long-term-moving-average trend ETF preserves
-      positive investor-level returns after its product expense and implementation
-      drag, without using third-party adjusted-price data as the primary source.
-    primary_source: >-
-      KraneShares official KMLM performance table and current official fund
-      documents.
-    performance_fields:
-      - nav_3_year_annualized
-      - nav_5_year_annualized
-      - nav_since_inception_annualized
-      - index_3_year_annualized
-      - index_5_year_annualized
-      - index_since_inception_annualized
-    interpretation:
-      implementation_survivor: >-
-        KMLM official NAV annualized return is strictly positive for every
-        available 3-year, 5-year, and since-inception standardized period.
-      implementation_not_supported: >-
-        One or more of those available official NAV annualized returns is
-        nonpositive.
-    implementation_drag: >-
-      Report the annualized difference between the official index return and NAV
-      return for each common standardized period. Do not impose an after-the-fact
-      pass threshold on that gap.
-    constraints:
-      - use_official_provider_returns_as_primary_evidence
-      - preserve_report_date_and_source
-      - verify_current_expense_ratio_and_methodology
-      - do_not_use_backfilled_pre_inception_fund_returns
-      - do_not_treat_kmlm_as_identical_to_aqr_tsmom
-      - no_capital_deployment
+    Stop active retrospective market-method research and preserve the completed
+    evidence state. Return scarce research time to earning or other productive
+    work unless a reopening condition is deliberately invoked.
+  status: hold
+  current_leading_candidate:
+    method: PRICE_TIME_SERIES_TREND
+    conclusion: >-
+      Diversified trend has the strongest combination of historical persistence,
+      transparent rules, and accessible implementation found by this program, but
+      no capital decision is authorized.
+  reopening_conditions:
+    - explicit_owner_choice_to_begin_prospective_trend_validation
+    - explicit_owner_request_for_separate_capital_allocation_analysis
+    - materially_new_evidence_changes_a_deferred_method_ranking
+    - substantially_cheaper_clean_test_becomes_available_for_a_deferred_candidate
+  prohibited_by_current_state:
+    - additional_retrospective_parameter_search
+    - paid_data_purchase
+    - direct_futures_system_build
+    - live_capital_deployment
   completion_condition: >-
-    Stage B records a frozen implementation disposition, current methodology and
-    cost, and the observed index-to-NAV implementation gap. No licensed futures
-    data purchase or direct futures implementation is authorized by this audit.
+    HOLD-001 remains satisfied while no reopening condition has been deliberately
+    invoked. Git history and the evidence snapshots preserve the completed
+    historical program.
